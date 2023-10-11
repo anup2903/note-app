@@ -27,13 +27,13 @@ function App() {
   const handleClose = () => setOpen(false);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/notes')
+    axios.get('https://anupserver.onrender.com/api/notes')
       .then(response => setNotes(response.data))
       .catch(error => console.error('Error fetching notes:', error));
   }, []);
 
   const handleCreateNote = () => {
-    axios.post('http://localhost:5000/api/notes', newNote)
+    axios.post('https://anupserver.onrender.com/api/notes', newNote)
       .then(response => {
         setNotes([...notes, response.data]);
         setNewNote({ title: '', content: '' });
@@ -44,7 +44,7 @@ function App() {
   const handleUpdateNote = () => {
     if (!selectedNote) return;
 
-    axios.put(`http://localhost:5000/api/notes/${selectedNote._id}`, updateData)
+    axios.put(`https://anupserver.onrender.com/api/notes/${selectedNote._id}`, updateData)
       .then(response => {
         const updatedNotes = notes.map(note => (note._id === response.data._id ? response.data : note));
         setNotes(updatedNotes);
@@ -55,7 +55,7 @@ function App() {
   };
 
   const handleDeleteNote = (id) => {
-    axios.delete(`http://localhost:5000/api/notes/${id}`)
+    axios.delete(`https://anupserver.onrender.com/api/notes/${id}`)
       .then(response => {
         const filteredNotes = notes.filter(note => note._id !== id);
         setNotes(filteredNotes);
